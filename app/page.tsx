@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { CheckCircle2, Sparkles, BarChart3, Zap } from 'lucide-react'
+import { IntroVideo } from '@/components/IntroVideo'
 
 export default function Home() {
   return (
@@ -19,22 +20,7 @@ export default function Home() {
           </p>
           
           {/* Intro Video */}
-          <div className="w-full max-w-4xl mt-4 mb-4">
-            <div className="relative aspect-video rounded-lg overflow-hidden border shadow-lg bg-black">
-              <video
-                className="w-full h-full object-cover"
-                controls
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-              >
-                <source src="/intro.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
+          <IntroVideo />
 
           <div className="flex flex-col gap-4 sm:flex-row">
             <Button asChild size="lg" className="text-lg px-8">
