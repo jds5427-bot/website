@@ -1,17 +1,28 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 export function IntroVideo() {
-  const [isVisible, setIsVisible] = useState(true)
+  const [isFaded, setIsFaded] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
 
   const handleVideoEnd = () => {
-    setIsVisible(false)
-  }
-
-  if (!isVisible) {
-    return null
+    if (videoRef.current) {
+      // Fade out the video
+      setIsFaded(true)
+      
+      // After fade completes, reset to first frame
+      setTimeout(() => {
+        if (videoRef.current) {
+          videoRef.current.currentTime = 0
+          videoRef.current.pause()
+          // Fade back in to show first frame
+          setTimeout(() => {
+            setIsFaded(false)
+          }, 50)
+        }
+      }, 500) // Wait for fade out to complete
+    }
   }
 
   return (
@@ -19,7 +30,9 @@ export function IntroVideo() {
       <div className="relative aspect-video rounded-lg overflow-hidden border shadow-lg bg-black">
         <video
           ref={videoRef}
-          className="w-full h-full object-cover"
+          className={`w-full h-full object-cover transition-opacity duration-500 ${
+            isFaded ? 'opacity-0' : 'opacity-100'
+          }`}
           muted
           autoPlay
           playsInline

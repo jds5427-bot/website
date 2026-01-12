@@ -10,6 +10,9 @@ export default function Home() {
       {/* Hero Section */}
       <section className="container flex flex-col items-center justify-center space-y-8 py-24 md:py-32">
         <div className="mx-auto flex max-w-[980px] flex-col items-center gap-6 text-center">
+          {/* Intro Video */}
+          <IntroVideo />
+          
           <h1 className="text-4xl font-bold leading-tight tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
             AI-Powered Business Development
             <span className="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent"> for Professional Services</span>
@@ -18,9 +21,6 @@ export default function Home() {
             Automate client outreach, streamline project management, and optimize billing with our unified SaaS platform. 
             Built by professional service experts for professional service experts.
           </p>
-          
-          {/* Intro Video */}
-          <IntroVideo />
 
           <div className="flex flex-col gap-4 sm:flex-row">
             <Button asChild size="lg" className="text-lg px-8">
