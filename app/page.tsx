@@ -17,6 +17,25 @@ export default function Home() {
             Automate client outreach, streamline project management, and optimize billing with our unified SaaS platform. 
             Built by professional service experts for professional service experts.
           </p>
+          
+          {/* Intro Video */}
+          <div className="w-full max-w-4xl mt-4 mb-4">
+            <div className="relative aspect-video rounded-lg overflow-hidden border shadow-lg bg-black">
+              <video
+                className="w-full h-full object-cover"
+                controls
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+              >
+                <source src="/intro.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+
           <div className="flex flex-col gap-4 sm:flex-row">
             <Button asChild size="lg" className="text-lg px-8">
               <Link href="/waitlist">Join the Waitlist</Link>

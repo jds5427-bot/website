@@ -15,9 +15,18 @@ const waitlistSchema = z.object({
 export async function POST(request: NextRequest) {
   try {
     // Validate environment variables at runtime
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    const missingVars: string[] = []
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) missingVars.push('NEXT_PUBLIC_SUPABASE_URL')
+    if (!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) missingVars.push('NEXT_PUBLIC_SUPABASE_ANON_KEY')
+    if (!process.env.RESEND_API_KEY) missingVars.push('RESEND_API_KEY')
+    
+    if (missingVars.length > 0) {
+      console.error('Missing environment variables:', missingVars.join(', '))
       return NextResponse.json(
-        { error: 'Server configuration error. Please contact support.' },
+        { 
+          error: 'Server configuration error. Missing required environment variables.',
+          details: missingVars
+        },
         { status: 500 }
       )
     }
