@@ -15,9 +15,9 @@ export function Header() {
           <Image
             src="/logo.png"
             alt="excede"
-            width={180}
-            height={48}
-            className="h-12 w-auto"
+            width={540}
+            height={144}
+            className="h-36 w-auto"
             priority
           />
         </Link>
@@ -28,15 +28,13 @@ export function Header() {
             onMouseEnter={() => setHoveredLink('products')}
             onMouseLeave={() => setHoveredLink(null)}
           >
-            {hoveredLink === 'products' && (
-              <Image
-                src="/icon.png"
-                alt=""
-                width={20}
-                height={20}
-                className="h-5 w-5 transition-opacity duration-200"
-              />
-            )}
+            <Image
+              src="/icon.png"
+              alt=""
+              width={20}
+              height={20}
+              className={`h-5 w-5 transition-opacity duration-200 ${hoveredLink === 'products' ? 'opacity-100' : 'opacity-0'}`}
+            />
             Products
           </Link>
           <Link 
@@ -45,15 +43,13 @@ export function Header() {
             onMouseEnter={() => setHoveredLink('about')}
             onMouseLeave={() => setHoveredLink(null)}
           >
-            {hoveredLink === 'about' && (
-              <Image
-                src="/icon.png"
-                alt=""
-                width={20}
-                height={20}
-                className="h-5 w-5 transition-opacity duration-200"
-              />
-            )}
+            <Image
+              src="/icon.png"
+              alt=""
+              width={20}
+              height={20}
+              className={`h-5 w-5 transition-opacity duration-200 ${hoveredLink === 'about' ? 'opacity-100' : 'opacity-0'}`}
+            />
             About
           </Link>
           <Link 
@@ -62,15 +58,13 @@ export function Header() {
             onMouseEnter={() => setHoveredLink('contact')}
             onMouseLeave={() => setHoveredLink(null)}
           >
-            {hoveredLink === 'contact' && (
-              <Image
-                src="/icon.png"
-                alt=""
-                width={20}
-                height={20}
-                className="h-5 w-5 transition-opacity duration-200"
-              />
-            )}
+            <Image
+              src="/icon.png"
+              alt=""
+              width={20}
+              height={20}
+              className={`h-5 w-5 transition-opacity duration-200 ${hoveredLink === 'contact' ? 'opacity-100' : 'opacity-0'}`}
+            />
             Contact
           </Link>
         </nav>
