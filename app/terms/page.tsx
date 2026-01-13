@@ -113,7 +113,7 @@ export default function TermsOfServicePage() {
         <section>
           <h2 className="text-2xl font-semibold mt-8 mb-4">Intellectual Property</h2>
           <p>
-            The Service and its original content, features, and functionality are owned by exceda, inc. and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.
+            The Service and its original content, features, and functionality are owned by excede, inc. and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.
           </p>
           <p>
             You may not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any of the material on our Service without prior written consent.
@@ -154,14 +154,14 @@ export default function TermsOfServicePage() {
         <section>
           <h2 className="text-2xl font-semibold mt-8 mb-4">Limitation of Liability</h2>
           <p>
-            TO THE MAXIMUM EXTENT PERMITTED BY LAW, EXCEDA, INC. SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY, OR ANY LOSS OF DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES RESULTING FROM YOUR USE OF THE SERVICE.
+            TO THE MAXIMUM EXTENT PERMITTED BY LAW, EXCEDE, INC. SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY, OR ANY LOSS OF DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES RESULTING FROM YOUR USE OF THE SERVICE.
           </p>
         </section>
 
         <section>
           <h2 className="text-2xl font-semibold mt-8 mb-4">Indemnification</h2>
           <p>
-            You agree to indemnify and hold harmless exceda, inc., its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses, including reasonable attorney's fees, arising out of or in any way connected with your access to or use of the Service or violation of these Terms.
+            You agree to indemnify and hold harmless excede, inc., its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses, including reasonable attorney's fees, arising out of or in any way connected with your access to or use of the Service or violation of these Terms.
           </p>
         </section>
 
@@ -199,7 +199,7 @@ export default function TermsOfServicePage() {
         <section>
           <h2 className="text-2xl font-semibold mt-8 mb-4">Entire Agreement</h2>
           <p>
-            These Terms constitute the entire agreement between you and exceda, inc. regarding the Service and supersede all prior and contemporaneous written or oral agreements.
+            These Terms constitute the entire agreement between you and excede, inc. regarding the Service and supersede all prior and contemporaneous written or oral agreements.
           </p>
         </section>
 

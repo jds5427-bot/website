@@ -107,7 +107,7 @@ export default function RootLayout({
       '@context': 'https://schema.org',
       '@type': 'Organization',
       name: 'excede',
-      legalName: 'exceda, inc.',
+      legalName: 'excede, inc.',
       description: 'AI-powered business development automation platform for professional services firms',
       url: baseUrl,
       logo: `${baseUrl}/logo.png`,

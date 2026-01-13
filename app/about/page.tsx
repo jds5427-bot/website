@@ -47,7 +47,7 @@ export default function AboutPage() {
     mainEntity: {
       '@type': 'Organization',
       name: 'excede',
-      legalName: 'exceda, inc.',
+      legalName: 'excede, inc.',
       founder: [
         {
           '@type': 'Person',
