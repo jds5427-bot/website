@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { createServerClient } from '@/lib/supabase'
 import { sendWelcomeEmail } from '@/lib/email'
 
 export async function GET(request: NextRequest) {
@@ -14,6 +14,9 @@ export async function GET(request: NextRequest) {
       )
     }
     
+    // Use service role client to bypass RLS for server-side operations
+    const supabase = createServerClient()
+    
     // Find signup by token
     const { data: signup, error: findError } = await supabase
       .from('waitlist_signups')
@@ -22,6 +25,7 @@ export async function GET(request: NextRequest) {
       .single()
     
     if (findError || !signup) {
+      console.error('Find error:', findError)
       return NextResponse.json(
         { error: 'Invalid or expired verification token' },
         { status: 400 }

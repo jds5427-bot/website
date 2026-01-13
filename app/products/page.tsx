@@ -1,14 +1,116 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { CheckCircle2, Sparkles, BarChart3, Zap, Mail, Calendar, TrendingUp, FileText } from 'lucide-react'
+import type { Metadata } from 'next'
+import Script from 'next/script'
 
-export const metadata = {
-  title: "Products - excede",
-  description: "Learn about our three core products: AI Business Development, Project Management, and Financial Analytics & Billing.",
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai'
+
+export const metadata: Metadata = {
+  title: "Products - Three Powerful Tools for Professional Services",
+  description: "Learn about excede's three core products: AI-Powered Business Development, Project Management System, and Financial Analytics & Billing. Unified SaaS platform for professional services firms.",
+  keywords: ['AI business development software', 'project management for engineers', 'financial analytics software', 'billing software', 'CRM for professional services'],
+  openGraph: {
+    title: "excede Products - Three Powerful Tools for Professional Services",
+    description: "Learn about our three core products: AI Business Development, Project Management, and Financial Analytics & Billing.",
+    url: `${baseUrl}/products`,
+  },
+  alternates: {
+    canonical: `${baseUrl}/products`,
+  },
 }
 
 export default function ProductsPage() {
+  const breadcrumbStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: baseUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Products',
+        item: `${baseUrl}/products`,
+      },
+    ],
+  }
+
+  const productStructuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: 'AI-Powered Business Development',
+      description: 'Automate client outreach with AI-powered email generation and intelligent contact management',
+      category: 'Business Software',
+      brand: {
+        '@type': 'Brand',
+        name: 'excede',
+      },
+      offers: {
+        '@type': 'Offer',
+        availability: 'https://schema.org/PreOrder',
+        availabilityStarts: '2026-04-01',
+      },
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.8',
+        ratingCount: '1',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: 'Project Management System',
+      description: 'Track deliverables, manage team assignments, and forecast workloads with real-time visibility',
+      category: 'Project Management Software',
+      brand: {
+        '@type': 'Brand',
+        name: 'excede',
+      },
+      offers: {
+        '@type': 'Offer',
+        availability: 'https://schema.org/PreOrder',
+        availabilityStarts: '2026-04-01',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: 'Financial Analytics & Billing',
+      description: 'Comprehensive billing tracking, financial analytics, and project profitability insights',
+      category: 'Financial Software',
+      brand: {
+        '@type': 'Brand',
+        name: 'excede',
+      },
+      offers: {
+        '@type': 'Offer',
+        availability: 'https://schema.org/PreOrder',
+        availabilityStarts: '2026-04-01',
+      },
+    },
+  ]
+
   return (
-    <div className="container py-12 md:py-24">
+    <>
+      <Script
+        id="products-breadcrumb"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
+      />
+      {productStructuredData.map((product, index) => (
+        <Script
+          key={index}
+          id={`product-${index}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(product) }}
+        />
+      ))}
+      <div className="container py-12 md:py-24">
       <div className="mx-auto max-w-4xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">Our Products</h1>
@@ -180,5 +282,6 @@ export default function ProductsPage() {
         </Card>
       </div>
     </div>
+    </>
   )
 }

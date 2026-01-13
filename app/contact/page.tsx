@@ -5,15 +5,82 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Mail, MessageSquare } from 'lucide-react'
 import Link from 'next/link'
+import type { Metadata } from 'next'
+import Script from 'next/script'
 
-export const metadata = {
-  title: "Contact Us - excede",
-  description: "Get in touch with excede for questions, partnerships, or investor inquiries.",
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai'
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description: "Get in touch with excede for questions, partnerships, or investor inquiries. Contact our team or reach out to investors@excede.ai for investment opportunities.",
+  keywords: ['contact excede', 'investor inquiries', 'partnerships', 'customer service'],
+  openGraph: {
+    title: "Contact excede - Get in Touch",
+    description: "Get in touch with excede for questions, partnerships, or investor inquiries.",
+    url: `${baseUrl}/contact`,
+  },
+  alternates: {
+    canonical: `${baseUrl}/contact`,
+  },
 }
 
 export default function ContactPage() {
+  const breadcrumbStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: baseUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Contact',
+        item: `${baseUrl}/contact`,
+      },
+    ],
+  }
+
+  const contactStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact excede',
+    description: 'Get in touch with excede for questions, partnerships, or investor inquiries',
+    url: `${baseUrl}/contact`,
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'excede',
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          contactType: 'Customer Service',
+          email: 'contact@excede.ai',
+        },
+        {
+          '@type': 'ContactPoint',
+          contactType: 'Investor Relations',
+          email: 'investors@excede.ai',
+        },
+      ],
+    },
+  }
+
   return (
-    <div className="container py-12 md:py-24">
+    <>
+      <Script
+        id="contact-breadcrumb"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
+      />
+      <Script
+        id="contact-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactStructuredData) }}
+      />
+      <article className="container py-12 md:py-24">
       <div className="mx-auto max-w-4xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
@@ -101,6 +168,7 @@ export default function ContactPage() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </article>
+    </>
   )
 }

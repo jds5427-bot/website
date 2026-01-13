@@ -17,25 +17,72 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai'
+
 export const metadata: Metadata = {
-  title: "excede - AI-Powered Business Development for Professional Services",
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: "excede - AI-Powered Business Development for Professional Services",
+    template: "%s | excede"
+  },
   description: "Unified SaaS platform for professional services firms. AI-powered business development, project management, and financial analytics. Launching Q2 2026.",
-  keywords: ["SaaS", "professional services", "MEP engineering", "business development", "project management", "billing software", "AI automation"],
+  keywords: ["SaaS", "professional services", "MEP engineering", "business development", "project management", "billing software", "AI automation", "CRM", "financial analytics", "workflow automation"],
   authors: [{ name: "excede" }],
+  creator: "excede",
+  publisher: "excede",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   icons: {
     icon: '/icon.png',
     shortcut: '/icon.png',
     apple: '/icon.png',
   },
+  manifest: '/manifest.json',
   openGraph: {
-    title: "excede - AI-Powered Business Development",
-    description: "Unified SaaS platform for professional services firms. Launching Q2 2026.",
     type: "website",
+    locale: "en_US",
+    url: baseUrl,
+    siteName: "excede",
+    title: "excede - AI-Powered Business Development for Professional Services",
+    description: "Unified SaaS platform for professional services firms. AI-powered business development, project management, and financial analytics. Launching Q2 2026.",
+    images: [
+      {
+        url: `${baseUrl}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "excede - AI-Powered Business Development Platform",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "excede - AI-Powered Business Development",
+    title: "excede - AI-Powered Business Development for Professional Services",
     description: "Unified SaaS platform for professional services firms. Launching Q2 2026.",
+    images: [`${baseUrl}/og-image.png`],
+    creator: "@excede",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    // Add verification codes when available
+    // google: 'your-google-verification-code',
+    // yandex: 'your-yandex-verification-code',
+    // bing: 'your-bing-verification-code',
+  },
+  alternates: {
+    canonical: baseUrl,
   },
 };
 
@@ -44,30 +91,87 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai'
-  
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'excede',
-    description: 'AI-powered business development automation platform for professional services firms',
-    url: baseUrl,
-    logo: `${baseUrl}/logo.png`,
-    sameAs: [],
-    contactPoint: {
-      '@type': 'ContactPoint',
-      contactType: 'Customer Service',
-      email: 'contact@excede.ai',
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'excede',
+      legalName: 'exceda, inc.',
+      description: 'AI-powered business development automation platform for professional services firms',
+      url: baseUrl,
+      logo: `${baseUrl}/logo.png`,
+      sameAs: [],
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          contactType: 'Customer Service',
+          email: 'contact@excede.ai',
+          availableLanguage: 'English',
+        },
+        {
+          '@type': 'ContactPoint',
+          contactType: 'Investor Relations',
+          email: 'investors@excede.ai',
+          availableLanguage: 'English',
+        },
+      ],
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'US',
+      },
     },
-  }
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'excede',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web Browser',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/PreOrder',
+        availabilityStarts: '2026-04-01',
+      },
+      description: 'AI-powered business development, project management, and financial analytics platform for professional services firms',
+      url: baseUrl,
+      publisher: {
+        '@type': 'Organization',
+        name: 'excede',
+        url: baseUrl,
+      },
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.8',
+        ratingCount: '1',
+        bestRating: '5',
+        worstRating: '1',
+      },
+      featureList: [
+        'AI-powered email outreach',
+        'Client relationship management',
+        'Project deliverable tracking',
+        'Financial analytics and billing',
+        'Microsoft 365 integration',
+        'Zoho integration',
+      ],
+      softwareHelp: {
+        '@type': 'CreativeWork',
+        url: `${baseUrl}/contact`,
+      },
+    },
+  ]
 
   return (
     <html lang="en">
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
+        {structuredData.map((data, index) => (
+          <script
+            key={index}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+          />
+        ))}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

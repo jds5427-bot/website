@@ -3,10 +3,74 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { CheckCircle2, Sparkles, BarChart3, Zap } from 'lucide-react'
 import { IntroVideo } from '@/components/IntroVideo'
+import type { Metadata } from 'next'
+import Script from 'next/script'
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai'
+
+export const metadata: Metadata = {
+  title: 'AI-Powered Business Development for Professional Services',
+  description: 'Unified SaaS platform for professional services firms. AI-powered business development, project management, and financial analytics. Automate client outreach, streamline project management, and optimize billing. Launching Q2 2026.',
+  keywords: ['AI business development', 'professional services software', 'project management', 'financial analytics', 'CRM for engineers', 'MEP engineering software', 'SaaS platform'],
+  openGraph: {
+    title: 'excede - AI-Powered Business Development for Professional Services',
+    description: 'Unified SaaS platform for professional services firms. Launching Q2 2026.',
+    url: baseUrl,
+    type: 'website',
+  },
+  alternates: {
+    canonical: baseUrl,
+  },
+}
 
 export default function Home() {
+  const homepageStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'excede - AI-Powered Business Development Platform',
+    description: 'Unified SaaS platform for professional services firms. AI-powered business development, project management, and financial analytics.',
+    url: baseUrl,
+    mainEntity: {
+      '@type': 'SoftwareApplication',
+      name: 'excede',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web Browser',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/PreOrder',
+        availabilityStarts: '2026-04-01',
+      },
+      description: 'AI-powered business development, project management, and financial analytics platform',
+      featureList: [
+        'AI-powered email outreach and client relationship management',
+        'Project deliverable tracking and team workload management',
+        'Financial analytics and 48-month billing forecasts',
+        'Microsoft 365 and Zoho integrations',
+      ],
+    },
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: baseUrl,
+        },
+      ],
+    },
+  }
+
   return (
-    <div className="flex min-h-screen flex-col">
+    <>
+      <Script
+        id="homepage-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageStructuredData) }}
+      />
+      <div className="flex min-h-screen flex-col">
       {/* Hero Section */}
       <section className="container flex flex-col items-center justify-center space-y-8 py-24 md:py-32">
         <div className="mx-auto flex max-w-[980px] flex-col items-center gap-6 text-center">
@@ -208,6 +272,7 @@ export default function Home() {
           </Button>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   )
 }

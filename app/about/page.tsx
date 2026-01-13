@@ -1,13 +1,81 @@
 import { Card, CardContent } from '@/components/ui/card'
+import type { Metadata } from 'next'
+import Script from 'next/script'
 
-export const metadata = {
-  title: "About Us - excede",
-  description: "Learn about excede and our mission to transform professional services firms with AI-powered tools.",
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai'
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description: "Learn about excede and our mission to transform professional services firms with AI-powered tools. Meet our team of experienced engineers building the future of professional services management.",
+  keywords: ['about excede', 'professional services software', 'MEP engineering software', 'company mission', 'team'],
+  openGraph: {
+    title: "About excede - Building the Future of Professional Services Management",
+    description: "Learn about excede and our mission to transform professional services firms with AI-powered tools.",
+    url: `${baseUrl}/about`,
+  },
+  alternates: {
+    canonical: `${baseUrl}/about`,
+  },
 }
 
 export default function AboutPage() {
+  const breadcrumbStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: baseUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'About',
+        item: `${baseUrl}/about`,
+      },
+    ],
+  }
+
+  const aboutStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'About excede',
+    description: 'Learn about excede and our mission to transform professional services firms with AI-powered tools',
+    url: `${baseUrl}/about`,
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'excede',
+      legalName: 'exceda, inc.',
+      founder: [
+        {
+          '@type': 'Person',
+          name: 'Jonathan Sharp',
+          jobTitle: 'President / Chief Executive Officer / Director',
+        },
+        {
+          '@type': 'Person',
+          name: 'Rafael Figueroa',
+          jobTitle: 'Chairman of the Board / Director',
+        },
+      ],
+    },
+  }
+
   return (
-    <div className="container py-12 md:py-24">
+    <>
+      <Script
+        id="about-breadcrumb"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
+      />
+      <Script
+        id="about-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutStructuredData) }}
+      />
+      <article className="container py-12 md:py-24">
       <div className="mx-auto max-w-4xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">About excede</h1>
@@ -88,6 +156,7 @@ export default function AboutPage() {
           </Card>
         </div>
       </div>
-    </div>
+    </article>
+    </>
   )
 }

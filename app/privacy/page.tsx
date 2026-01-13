@@ -1,13 +1,54 @@
 import { Metadata } from 'next'
+import Script from 'next/script'
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | excede',
-  description: 'Privacy Policy for excede - Learn how we collect, use, and protect your information.',
+  title: 'Privacy Policy',
+  description: 'Privacy Policy for excede - Learn how we collect, use, and protect your information. Understand your privacy rights and how we safeguard your data.',
+  keywords: ['privacy policy', 'data protection', 'privacy rights', 'GDPR'],
+  openGraph: {
+    title: 'Privacy Policy | excede',
+    description: 'Privacy Policy for excede - Learn how we collect, use, and protect your information.',
+    url: `${baseUrl}/privacy`,
+  },
+  alternates: {
+    canonical: `${baseUrl}/privacy`,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function PrivacyPolicyPage() {
+  const breadcrumbStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: baseUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Privacy Policy',
+        item: `${baseUrl}/privacy`,
+      },
+    ],
+  }
+
   return (
-    <div className="container py-16 max-w-4xl">
+    <>
+      <Script
+        id="privacy-breadcrumb"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
+      />
+      <article className="container py-16 max-w-4xl">
       <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
         Privacy Policy
       </h1>
@@ -139,6 +180,7 @@ export default function PrivacyPolicyPage() {
           </p>
         </section>
       </div>
-    </div>
+    </article>
+    </>
   )
 }

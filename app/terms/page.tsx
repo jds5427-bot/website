@@ -1,13 +1,54 @@
 import { Metadata } from 'next'
+import Script from 'next/script'
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | excede',
-  description: 'Terms of Service for excede - Read our terms and conditions for using our services.',
+  title: 'Terms of Service',
+  description: 'Terms of Service for excede - Read our terms and conditions for using our services. Understand your rights and obligations when using the excede platform.',
+  keywords: ['terms of service', 'terms and conditions', 'user agreement', 'service terms'],
+  openGraph: {
+    title: 'Terms of Service | excede',
+    description: 'Terms of Service for excede - Read our terms and conditions for using our services.',
+    url: `${baseUrl}/terms`,
+  },
+  alternates: {
+    canonical: `${baseUrl}/terms`,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function TermsOfServicePage() {
+  const breadcrumbStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: baseUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Terms of Service',
+        item: `${baseUrl}/terms`,
+      },
+    ],
+  }
+
   return (
-    <div className="container py-16 max-w-4xl">
+    <>
+      <Script
+        id="terms-breadcrumb"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
+      />
+      <article className="container py-16 max-w-4xl">
       <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
         Terms of Service
       </h1>
@@ -173,6 +214,7 @@ export default function TermsOfServicePage() {
           </p>
         </section>
       </div>
-    </div>
+    </article>
+    </>
   )
 }
