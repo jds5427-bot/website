@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -8,9 +9,13 @@ export function Footer() {
       <div className="container py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
-              excede
-            </h3>
+            <Image
+              src="/logo.png"
+              alt="excede"
+              width={120}
+              height={32}
+              className="h-8 w-auto"
+            />
             <p className="text-sm text-muted-foreground">
               AI-powered business development, project management, and billing solutions for professional services firms.
             </p>
