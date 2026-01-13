@@ -12,7 +12,7 @@ export async function sendVerificationEmail(email: string, token: string) {
   
   try {
     const { data, error } = await resend.emails.send({
-      from: 'excede <onboarding@resend.dev>',
+      from: 'excede <noreply@excede.ai>',
       to: email,
       subject: 'Verify your email - excede',
       html: `
@@ -62,7 +62,7 @@ export async function sendWelcomeEmail(email: string) {
 
   try {
     const { data, error } = await resend.emails.send({
-      from: 'excede <onboarding@resend.dev>',
+      from: 'excede <noreply@excede.ai>',
       to: email,
       subject: "You're all set! - excede",
       html: `
