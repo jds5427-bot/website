@@ -1,0 +1,16 @@
+{
+  "name": "excede - AI-Powered Business Development",
+  "short_name": "excede",
+  "description": "Unified SaaS platform for professional services firms. AI-powered business development, project management, and financial analytics.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}

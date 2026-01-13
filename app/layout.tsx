@@ -85,10 +85,12 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // Add verification codes when available
-    // google: 'your-google-verification-code',
-    // yandex: 'your-yandex-verification-code',
-    // bing: 'your-bing-verification-code',
+    // TODO: Add your verification codes from search engines
+    // Get Google verification code from: https://search.google.com/search-console
+    // Format: Just the code value (e.g., 'ABC123XYZ...'), not the full meta tag
+    // google: 'paste-your-google-verification-code-here',
+    // bing: 'paste-your-bing-verification-code-here',
+    // yandex: 'paste-your-yandex-verification-code-here', // Optional - mainly for Russian market
   },
   alternates: {
     canonical: baseUrl,
