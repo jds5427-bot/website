@@ -22,6 +22,11 @@ export const metadata: Metadata = {
   description: "Unified SaaS platform for professional services firms. AI-powered business development, project management, and financial analytics. Launching Q2 2026.",
   keywords: ["SaaS", "professional services", "MEP engineering", "business development", "project management", "billing software", "AI automation"],
   authors: [{ name: "excede" }],
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
+  },
   openGraph: {
     title: "excede - AI-Powered Business Development",
     description: "Unified SaaS platform for professional services firms. Launching Q2 2026.",
