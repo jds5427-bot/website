@@ -107,3 +107,83 @@ export async function sendWelcomeEmail(email: string) {
     throw error
   }
 }
+
+export async function sendContactInquiryEmail(name: string, email: string, message: string) {
+  if (!process.env.RESEND_API_KEY) {
+    console.error('RESEND_API_KEY is not set. Email will not be sent.')
+    throw new Error('Email service not configured')
+  }
+
+  const contactEmail = process.env.CONTACT_EMAIL || 'contact@excede.ai'
+
+  try {
+    // Send email to the company
+    const { data, error } = await resend.emails.send({
+      from: 'excede <noreply@excede.ai>',
+      to: contactEmail,
+      replyTo: email,
+      subject: `New Contact Inquiry from ${name}`,
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          </head>
+          <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center; border-radius: 8px 8px 0 0;">
+              <h1 style="color: white; margin: 0; font-size: 28px;">New Contact Inquiry</h1>
+            </div>
+            <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 8px 8px;">
+              <p style="font-size: 16px; margin-bottom: 20px;"><strong>From:</strong> ${name}</p>
+              <p style="font-size: 16px; margin-bottom: 20px;"><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+              <div style="background: white; padding: 20px; border-radius: 6px; margin-top: 20px; border-left: 4px solid #667eea;">
+                <p style="font-size: 16px; margin: 0; white-space: pre-wrap;">${message.replace(/\n/g, '<br>')}</p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `,
+    })
+
+    if (error) {
+      console.error('Error sending contact inquiry email:', error)
+      throw error
+    }
+
+    // Send confirmation email to the user
+    await resend.emails.send({
+      from: 'excede <noreply@excede.ai>',
+      to: email,
+      subject: 'We received your message - excede',
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          </head>
+          <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center; border-radius: 8px 8px 0 0;">
+              <h1 style="color: white; margin: 0; font-size: 28px;">Thank You for Reaching Out!</h1>
+            </div>
+            <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 8px 8px;">
+              <p style="font-size: 16px; margin-bottom: 20px;">Hi ${name},</p>
+              <p style="font-size: 16px; margin-bottom: 20px;">We've received your message and will get back to you as soon as possible. We typically respond within 24-48 hours.</p>
+              <p style="font-size: 16px; margin-bottom: 20px;">In the meantime, feel free to explore our website to learn more about what we're building.</p>
+              <div style="text-align: center; margin: 30px 0;">
+                <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/products" style="display: inline-block; background: #667eea; color: white; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px;">Explore Our Products</a>
+              </div>
+              <p style="font-size: 14px; color: #666; margin-top: 30px;">Best regards,<br>The excede Team</p>
+            </div>
+          </body>
+        </html>
+      `,
+    })
+
+    return data
+  } catch (error) {
+    console.error('Failed to send contact inquiry email:', error)
+    throw error
+  }
+}

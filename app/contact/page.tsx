@@ -1,12 +1,10 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Mail, MessageSquare } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import Script from 'next/script'
+import { GeneralInquiriesForm } from '@/components/GeneralInquiriesForm'
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai'
 
@@ -98,27 +96,7 @@ export default function ContactPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form className="space-y-4" suppressHydrationWarning>
-                <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
-                  <Input id="name" placeholder="Your name" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="you@company.com" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea id="message" placeholder="Your message..." rows={5} />
-                </div>
-                <Button type="submit" className="w-full">
-                  <MessageSquare className="mr-2 h-4 w-4" />
-                  Send Message
-                </Button>
-              </form>
-              <p className="text-sm text-muted-foreground mt-4">
-                Note: This is a demo form. For production, integrate with your email service or contact management system.
-              </p>
+              <GeneralInquiriesForm />
             </CardContent>
           </Card>
 
