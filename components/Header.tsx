@@ -15,9 +15,9 @@ export function Header() {
           <Image
             src="/logo.png"
             alt="excede"
-            width={540}
-            height={144}
-            className="h-36 w-auto"
+            width={180}
+            height={48}
+            className="h-12 w-auto"
             priority
           />
           <span className="text-xs font-normal text-muted-foreground align-super">™</span>
