@@ -12,9 +12,9 @@ export function Footer() {
             <Image
               src="/logo.png"
               alt="excede"
-              width={120}
-              height={32}
-              className="h-8 w-auto"
+              width={180}
+              height={48}
+              className="h-12 w-auto"
             />
             <p className="text-sm text-muted-foreground">
               AI-powered business development, project management, and billing solutions for professional services firms.

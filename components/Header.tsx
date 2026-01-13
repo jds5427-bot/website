@@ -1,8 +1,13 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import { useState } from 'react'
 
 export function Header() {
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null)
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
@@ -10,20 +15,62 @@ export function Header() {
           <Image
             src="/logo.png"
             alt="excede"
-            width={120}
-            height={32}
-            className="h-8 w-auto"
+            width={180}
+            height={48}
+            className="h-12 w-auto"
             priority
           />
         </Link>
         <nav className="hidden md:flex items-center space-x-6">
-          <Link href="/products" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <Link 
+            href="/products" 
+            className="relative flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            onMouseEnter={() => setHoveredLink('products')}
+            onMouseLeave={() => setHoveredLink(null)}
+          >
+            {hoveredLink === 'products' && (
+              <Image
+                src="/icon.png"
+                alt=""
+                width={20}
+                height={20}
+                className="h-5 w-5 transition-opacity duration-200"
+              />
+            )}
             Products
           </Link>
-          <Link href="/about" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <Link 
+            href="/about" 
+            className="relative flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            onMouseEnter={() => setHoveredLink('about')}
+            onMouseLeave={() => setHoveredLink(null)}
+          >
+            {hoveredLink === 'about' && (
+              <Image
+                src="/icon.png"
+                alt=""
+                width={20}
+                height={20}
+                className="h-5 w-5 transition-opacity duration-200"
+              />
+            )}
             About
           </Link>
-          <Link href="/contact" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <Link 
+            href="/contact" 
+            className="relative flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            onMouseEnter={() => setHoveredLink('contact')}
+            onMouseLeave={() => setHoveredLink(null)}
+          >
+            {hoveredLink === 'contact' && (
+              <Image
+                src="/icon.png"
+                alt=""
+                width={20}
+                height={20}
+                className="h-5 w-5 transition-opacity duration-200"
+              />
+            )}
             Contact
           </Link>
         </nav>
