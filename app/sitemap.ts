@@ -1,7 +1,16 @@
 import { MetadataRoute } from 'next'
 
+// Helper function to ensure URL has protocol
+function ensureUrlProtocol(url: string): string {
+  if (!url) return 'https://excede.ai'
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url
+  }
+  return `https://${url}`
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai'
+  const baseUrl = ensureUrlProtocol(process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai')
   
   return [
     {
