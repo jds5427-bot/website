@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { supabase, createServerClient } from '@/lib/supabase'
 import { sendVerificationEmail } from '@/lib/email'
 import { z } from 'zod'
 import crypto from 'crypto'
@@ -53,14 +53,25 @@ export async function POST(request: NextRequest) {
           { status: 400 }
         )
       } else {
-        // Resend verification email
-        await sendVerificationEmail(validated.email, verificationToken)
+        // Resend verification email - use service role for update
+        const serverSupabase = createServerClient()
         
-        // Update token
-        await supabase
+        // Update token with service role client to bypass RLS
+        const { error: updateError } = await serverSupabase
           .from('waitlist_signups')
           .update({ verification_token: verificationToken })
           .eq('email', validated.email)
+        
+        if (updateError) {
+          console.error('Token update error:', updateError)
+          return NextResponse.json(
+            { error: 'Failed to update verification token. Please try again.' },
+            { status: 500 }
+          )
+        }
+        
+        // Send verification email
+        await sendVerificationEmail(validated.email, verificationToken)
         
         return NextResponse.json(
           { message: 'Verification email sent. Please check your inbox.' },
