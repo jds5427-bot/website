@@ -20,7 +20,6 @@ export function Header() {
             className="h-12 w-auto"
             priority
           />
-          <span className="text-xs font-normal text-muted-foreground align-super">™</span>
         </Link>
         <nav className="hidden md:flex items-center space-x-6">
           <Link 
