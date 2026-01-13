@@ -17,7 +17,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai'
+// Helper function to ensure URL has protocol
+function ensureUrlProtocol(url: string): string {
+  if (!url) return 'https://excede.ai'
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url
+  }
+  return `https://${url}`
+}
+
+const baseUrl = ensureUrlProtocol(process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai')
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
