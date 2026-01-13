@@ -14,6 +14,15 @@ export async function GET(request: NextRequest) {
       )
     }
     
+    // Check if service role key is configured
+    if (!process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY === 'placeholder-service-key') {
+      console.error('SUPABASE_SERVICE_ROLE_KEY is not configured')
+      return NextResponse.json(
+        { error: 'Server configuration error. Please contact support.' },
+        { status: 500 }
+      )
+    }
+    
     // Use service role client to bypass RLS for server-side operations
     const supabase = createServerClient()
     
@@ -24,8 +33,17 @@ export async function GET(request: NextRequest) {
       .eq('verification_token', token)
       .single()
     
-    if (findError || !signup) {
-      console.error('Find error:', findError)
+    if (findError) {
+      console.error('Find error:', JSON.stringify(findError, null, 2))
+      console.error('Token searched:', token)
+      return NextResponse.json(
+        { error: `Invalid or expired verification token: ${findError.message || 'Token not found'}` },
+        { status: 400 }
+      )
+    }
+    
+    if (!signup) {
+      console.error('No signup found for token:', token)
       return NextResponse.json(
         { error: 'Invalid or expired verification token' },
         { status: 400 }
