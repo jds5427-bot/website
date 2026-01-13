@@ -10,13 +10,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-start gap-1">
-              <Image
-                src="/logo.png"
-                alt="excede"
-                width={540}
-                height={144}
-                className="h-36 w-auto"
-              />
+            <Image
+              src="/logo.png"
+              alt="excede"
+              width={180}
+              height={48}
+              className="h-12 w-auto"
+            />
               <span className="text-xs font-normal text-muted-foreground align-super">™</span>
             </div>
             <p className="text-sm text-muted-foreground">
