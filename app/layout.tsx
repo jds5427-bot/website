@@ -110,7 +110,7 @@ export default function RootLayout({
       logo: `${baseUrl}/logo.png`,
       sameAs: [
         'https://www.linkedin.com/company/excede-ai',
-        'https://www.instagram.com/excedeai/',
+        'https://www.instagram.com/excede.ai/#',
       ],
       contactPoint: [
         {
