@@ -63,12 +63,37 @@ export default function Home() {
     },
   }
 
+  const videoStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: 'excede - AI-Powered Business Development Platform Introduction',
+    description: 'Introduction video showcasing excede, an AI-powered unified SaaS platform for professional services firms. Features business development automation, project management, and financial analytics.',
+    thumbnailUrl: `${baseUrl}/og-image.png`,
+    uploadDate: '2024-01-01',
+    contentUrl: `${baseUrl}/intro.mp4`,
+    embedUrl: `${baseUrl}/intro.mp4`,
+    duration: 'PT30S', // Update with actual video duration if known
+    publisher: {
+      '@type': 'Organization',
+      name: 'excede',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${baseUrl}/logo.png`,
+      },
+    },
+  }
+
   return (
     <>
       <Script
         id="homepage-structured-data"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageStructuredData) }}
+      />
+      <Script
+        id="video-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoStructuredData) }}
       />
       <div className="flex min-h-screen flex-col">
       {/* Hero Section */}

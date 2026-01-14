@@ -5,7 +5,6 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
-import { Analytics } from "@/components/Analytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -89,14 +88,6 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-  verification: {
-    // TODO: Add your verification codes from search engines
-    // Get Google verification code from: https://search.google.com/search-console
-    // Format: Just the code value (e.g., 'ABC123XYZ...'), not the full meta tag
-    // google: 'paste-your-google-verification-code-here',
-    // bing: 'paste-your-bing-verification-code-here',
-    // yandex: 'paste-your-yandex-verification-code-here', // Optional - mainly for Russian market
   },
   alternates: {
     canonical: baseUrl,
@@ -196,23 +187,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-              `}
-            </Script>
-          </>
-        )}
-        <Analytics />
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>
