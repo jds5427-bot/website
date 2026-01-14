@@ -52,6 +52,8 @@ export default function ProductsPage() {
       },
       offers: {
         '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
         availability: 'https://schema.org/PreOrder',
         availabilityStarts: '2026-04-01',
       },
@@ -73,6 +75,8 @@ export default function ProductsPage() {
       },
       offers: {
         '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
         availability: 'https://schema.org/PreOrder',
         availabilityStarts: '2026-04-01',
       },
@@ -89,6 +93,8 @@ export default function ProductsPage() {
       },
       offers: {
         '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
         availability: 'https://schema.org/PreOrder',
         availabilityStarts: '2026-04-01',
       },
