@@ -143,6 +143,7 @@ export default function RootLayout({
         priceCurrency: 'USD',
         availability: 'https://schema.org/PreOrder',
         availabilityStarts: '2026-04-01',
+        priceValidUntil: '2026-12-31',
       },
       description: 'AI-powered business development, project management, and financial analytics platform for professional services firms',
       url: baseUrl,
