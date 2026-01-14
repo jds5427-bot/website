@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { Instagram, Linkedin } from 'lucide-react'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -69,8 +70,32 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t text-center text-sm text-muted-foreground">
-          <p>&copy; {currentYear} excede, inc. All rights reserved.</p>
+        <div className="mt-12 pt-8 border-t">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-muted-foreground">
+              &copy; {currentYear} excede, inc. All rights reserved.
+            </p>
+            <div className="flex items-center gap-4">
+              <a
+                href="https://www.linkedin.com/company/excede-ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.instagram.com/excedeai/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

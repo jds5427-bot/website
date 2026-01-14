@@ -117,7 +117,10 @@ export default function RootLayout({
       description: 'AI-powered business development automation platform for professional services firms',
       url: baseUrl,
       logo: `${baseUrl}/logo.png`,
-      sameAs: [],
+      sameAs: [
+        'https://www.linkedin.com/company/excede-ai',
+        'https://www.instagram.com/excedeai/',
+      ],
       contactPoint: [
         {
           '@type': 'ContactPoint',
