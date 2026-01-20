@@ -50,6 +50,7 @@ export default function ProductsPage() {
         '@type': 'Brand',
         name: 'excede',
       },
+      image: `${baseUrl}/logo.png`,
       offers: {
         '@type': 'Offer',
         price: '0',
@@ -77,6 +78,7 @@ export default function ProductsPage() {
         '@type': 'Brand',
         name: 'excede',
       },
+      image: `${baseUrl}/logo.png`,
       offers: {
         '@type': 'Offer',
         price: '0',
@@ -104,6 +106,7 @@ export default function ProductsPage() {
         '@type': 'Brand',
         name: 'excede',
       },
+      image: `${baseUrl}/logo.png`,
       offers: {
         '@type': 'Offer',
         price: '0',
