@@ -6,7 +6,16 @@ import { IntroVideo } from '@/components/IntroVideo'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai'
+// Helper function to ensure URL has protocol
+function ensureUrlProtocol(url: string): string {
+  if (!url) return 'https://excede.ai'
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url
+  }
+  return `https://${url}`
+}
+
+const baseUrl = ensureUrlProtocol(process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai')
 
 export const metadata: Metadata = {
   title: 'AI-Powered Business Development for Professional Services',
@@ -42,6 +51,51 @@ export default function Home() {
         availability: 'https://schema.org/PreOrder',
         availabilityStarts: '2026-04-01',
         priceValidUntil: '2026-12-31',
+        hasMerchantReturnPolicy: {
+          '@type': 'MerchantReturnPolicy',
+          returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+          merchantReturnDays: 30,
+          returnMethod: 'https://schema.org/ReturnByMail',
+          returnFees: 'https://schema.org/FreeReturn',
+        },
+        shippingDetails: {
+          '@type': 'OfferShippingDetails',
+          shippingRate: {
+            '@type': 'MonetaryAmount',
+            value: '0',
+            currency: 'USD',
+          },
+          shippingDestination: {
+            '@type': 'DefinedRegion',
+            addressCountry: 'US',
+          },
+          deliveryTime: {
+            '@type': 'ShippingDeliveryTime',
+            businessDays: {
+              '@type': 'OpeningHoursSpecification',
+              dayOfWeek: [
+                'Monday',
+                'Tuesday',
+                'Wednesday',
+                'Thursday',
+                'Friday',
+              ],
+            },
+            cutoffTime: '14:00',
+            handlingTime: {
+              '@type': 'QuantitativeValue',
+              minValue: 0,
+              maxValue: 0,
+              unitCode: 'DAY',
+            },
+            transitTime: {
+              '@type': 'QuantitativeValue',
+              minValue: 0,
+              maxValue: 0,
+              unitCode: 'DAY',
+            },
+          },
+        },
       },
       description: 'AI-powered business development, project management, and financial analytics platform',
       featureList: [

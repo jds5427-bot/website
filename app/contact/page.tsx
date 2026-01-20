@@ -6,7 +6,16 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import { GeneralInquiriesForm } from '@/components/GeneralInquiriesForm'
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai'
+// Helper function to ensure URL has protocol
+function ensureUrlProtocol(url: string): string {
+  if (!url) return 'https://excede.ai'
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url
+  }
+  return `https://${url}`
+}
+
+const baseUrl = ensureUrlProtocol(process.env.NEXT_PUBLIC_SITE_URL || 'https://excede.ai')
 
 export const metadata: Metadata = {
   title: "Contact Us",
