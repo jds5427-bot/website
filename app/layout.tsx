@@ -45,11 +45,14 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: 'any' },
       { url: '/icon.png', type: 'image/png', sizes: '512x512' },
       { url: '/icon.png', type: 'image/png', sizes: '192x192' },
+      { url: '/icon.png', type: 'image/png', sizes: '48x48' },
       { url: '/icon.png', type: 'image/png', sizes: '32x32' },
+      { url: '/icon.png', type: 'image/png', sizes: '16x16' },
     ],
-    shortcut: '/icon.png',
+    shortcut: '/favicon.ico',
     apple: [
       { url: '/icon.png', sizes: '180x180', type: 'image/png' },
     ],
@@ -222,6 +225,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Explicit favicon links for Google */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/icon.png" type="image/png" sizes="512x512" />
+        <link rel="icon" href="/icon.png" type="image/png" sizes="192x192" />
+        <link rel="icon" href="/icon.png" type="image/png" sizes="48x48" />
+        <link rel="icon" href="/icon.png" type="image/png" sizes="32x32" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         {structuredData.map((data, index) => (
           <script
             key={index}
